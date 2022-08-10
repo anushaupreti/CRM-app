@@ -21,7 +21,8 @@
                             <th>Email</th>
                             <th>Servicename</th>
                             <th>Paid</th>
-                            <th>Action</th>
+                            {{-- <th>Remaining</th> --}}
+                            <th>Actions</th>
                         </tr>
                         @foreach ($payment as $r)
                         <tr>
@@ -31,15 +32,15 @@
                             <td>{{$r->student->email}}</td>
                             <td>{{$r->service->name}}</td>
                             <td>{{$r->paid}}</td>
-                            <td>{{$r->price-$r->total}}</td>                            
-                            {{-- <td class="row">
+                            {{-- <td>{{$r->price-$r->total}}</td>                            --}}
+                            <td class="row">
                                 <a href="/payment/{{ $r->id }}/edit" class="badge badge-primary m-1">Edit</a>
                                 <form action="/payment/{{ $r->id }}" method="POST">
                                     @method('DELETE')
                                     @csrf
-                                    <a class="badge badge-danger mt-0" type="submit">Delete</a>
+                                    {{-- <a class="badge badge-danger mt-0" type="submit">Delete</a> --}}
                                 </form>
-                            </td> --}}
+                            </td>
 
                         </tr>
 

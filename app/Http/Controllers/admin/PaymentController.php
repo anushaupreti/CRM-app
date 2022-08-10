@@ -21,6 +21,7 @@ class PaymentController extends Controller
         $student = Student::all();
         $service = Service::all();
         $payment = Payment::all();
+        // dd($payment);
         return view('backend.payment.index',compact('payment','student','service'));
     }
 

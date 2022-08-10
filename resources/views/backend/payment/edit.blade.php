@@ -18,7 +18,7 @@
                         <div class="form-group">
                             <label for="customer_id">Student Name</label>
                             <select class="form-control" name="customet_id" value="{{$payment->customer_id}}">
-                            @foreach ($students as $s)
+                            @foreach ($student as $s)
                             <option value="{{$s->id}}">{{$s->name}}</option>
                             @endforeach
                         </select>
