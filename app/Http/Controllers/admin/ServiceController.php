@@ -48,7 +48,7 @@ class ServiceController extends Controller
         $service->price = $request->price;
         $service->save();
         $request->session()->flash('message','Record saved successfully');
-        return redirect()->back();
+        return redirect()->route('service.index');
     }
 
     /**
@@ -93,7 +93,7 @@ class ServiceController extends Controller
         $service->price = $request->price;
         $service->update();
         $request->session()->flash('message','Record Update successfully');
-        return redirect()->back();
+        return redirect()->route('service.index');
     }
 
     /**

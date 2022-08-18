@@ -10,6 +10,7 @@ use App\Models\Service;
 class Payment extends Model
 {
     use HasFactory;
+    // protected $fillable = [''];
      /**
      * Get the customer that owns the Purchase
      *
@@ -17,7 +18,7 @@ class Payment extends Model
      */
     public function student()
     {
-        return $this->belongsTo(Student::class);
+        return $this->hasMany(Student::class,'id','student_id');
     }
 
     /**
@@ -29,5 +30,4 @@ class Payment extends Model
     {
         return $this->belongsTo(Service::class);
     }
-
 }

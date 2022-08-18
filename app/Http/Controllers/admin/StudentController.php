@@ -18,16 +18,23 @@ class StudentController extends Controller
      */
     public function index()
     {
+        $students = Student::all();
         $services = Service::all();
         $payment=DB::table('services')
-        ->select(DB::raw('sum(payments.paid) as total'),'payments.paid','payments.student_id','payments.service_id','services.name as servicename','services.price','students.name','students.email')
+        ->select(DB::raw('sum(payments.paid) as total'),'payments.paid','payments.student_id','payments.service_id','services.name as servicename','services.price','students.name','students.email','students.mobile','students.address','students.created_at')
         ->join('payments','payments.service_id','=','services.id')
         ->join('students','students.id','=','payments.student_id')
         ->groupBy('payments.student_id','payments.service_id')
+
         ->get();
         // dd($payment);
-        $students = DB::select('select * from students');
-        return view('backend.student.index',compact('payment'));
+        // $students = DB::select('select * from students');
+        // return view('backend.student.index',compact('payment','students'));
+        return view('backend.student.index', [
+            'payment' => $payment,
+            'student' => $students,
+            'service' => $services
+        ]);
     }
 
     /**
@@ -82,9 +89,26 @@ class StudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id) 
     {
-        //
+        $students = Student::all();
+        $services = Service::all();
+        $payment=DB::table('services')
+        ->select(DB::raw('sum(payments.paid) as total'),'payments.paid','payments.student_id','payments.service_id','services.name as servicename','services.price','students.name','students.email','students.mobile','students.address','students.created_at')
+        ->join('payments','payments.service_id','=','services.id')
+        ->join('students','students.id','=','payments.student_id')
+        ->groupBy('payments.student_id','payments.service_id')
+        ->where('students.id','=', $id)
+
+        ->get();
+        // dd($payment);
+        // $students = DB::select('select * from students');
+        // return view('backend.student.index',compact('payment','students'));
+        return view('backend.student.show', [
+            'payment' => $payment,
+            'student' => $students,
+            'service' => $services
+        ]); 
     }
 
     /**
@@ -132,7 +156,7 @@ class StudentController extends Controller
             return redirect()->back();
         }
         DB::commit();
-        $request->session()->flash('messase','Record updated successfully');
+        $request->session()->flash('message','Record updated successfully');
         // return view('backend.student.index');
         return redirect()->route('student.index');
         

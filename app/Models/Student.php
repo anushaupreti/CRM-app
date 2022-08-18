@@ -16,4 +16,11 @@ class Student extends Model
     public function service(){
         return $this->belongsTo(Service::class);
     }
+    // public function payment(){
+    //     return $this->hasMany(Payment::class);
+    // }
+    public function payments(){
+        return $this->hasMany(Payment::class,'student_id','id');
+    }
+
 }

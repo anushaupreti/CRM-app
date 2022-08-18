@@ -38,12 +38,9 @@
                                 <form action="/payment/{{ $r->id }}" method="POST">
                                     @method('DELETE')
                                     @csrf
-                                    {{-- <a class="badge badge-danger mt-0" type="submit">Delete</a> --}}
                                 </form>
                             </td>
-
                         </tr>
-
                         @endforeach
                     </table>
                 </div>
