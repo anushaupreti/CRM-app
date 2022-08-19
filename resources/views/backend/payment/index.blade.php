@@ -24,18 +24,20 @@
                             {{-- <th>Remaining</th> --}}
                             <th>Actions</th>
                         </tr>
-                        @foreach ($payment as $r)
+
+                        {{-- {{ $payment->students}} --}}
+                        @foreach ($payment as $key=>$contents)
                         <tr>
                             <td>{{$loop->index+1}}</td>
-                            <td>{{$r->service->created_at->format('Y-m-d')}}</td>
-                            <td>{{$r->student->name}}</td>
-                            <td>{{$r->student->email}}</td>
-                            <td>{{$r->service->name}}</td>
-                            <td>{{$r->paid}}</td>
+                            <td>{{$contents->created_at->format('Y-m-d')}}</td>
+                            <td>{{$contents->student}}</td>
+                            <td>{{$contents->email}}</td>
+                            <td>{{$contents->course}}</td>
+                            <td>{{$contents->paid}}</td>
                             {{-- <td>{{$r->price-$r->total}}</td>                            --}}
                             <td class="row">
-                                <a href="/payment/{{ $r->id }}/edit" class="badge badge-primary m-1">Edit</a>
-                                <form action="/payment/{{ $r->id }}" method="POST">
+                                <a href="/payment/{{ $contents->id }}/edit" class="badge badge-primary m-1">Edit</a>
+                                <form action="/payment/{{ $contents->id }}" method="POST">
                                     @method('DELETE')
                                     @csrf
                                 </form>

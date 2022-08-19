@@ -9,8 +9,7 @@
                 </div>
                 <div class="card-body">
                     <form action="/student/{{ $students->id }}" method="post">
-                        @csrf
-                        @method('put')
+                        
                         <div class="form-group">
                           <label for="name" class="form-label">Student Name <span class="text-danger">*</span></label>
                           <input type="text" class="form-control" name="name" id="name" value="{{ $students->name }}">

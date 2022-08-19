@@ -18,11 +18,13 @@ class PaymentController extends Controller
      */
     public function index()
     {
-        $student = Student::all();
+        $students = Student::all();
         $service = Service::all();
-        $payment = Payment::all();
-        // dd($payment);
-        return view('backend.payment.index',compact('payment','student','service'));
+        $payment = Payment::with('student')
+                    ->orderBy('id', 'DESC')
+                    ->get();
+        // dd($students);
+        return view('backend.payment.index',compact('payment'));
     }
 
     /**
