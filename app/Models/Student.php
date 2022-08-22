@@ -10,9 +10,9 @@ class Student extends Model
 {
     use HasFactory;
     protected $fillable = ['name','mobile','email','address','course','Total_fee'];
-    protected $casts =[
-        'created_at' => 'datetime'
-    ];
+    // protected $casts =[
+    //     'created_at' => 'datetime'
+    // ];
     public function service(){
         return $this->belongsTo(Service::class);
     }

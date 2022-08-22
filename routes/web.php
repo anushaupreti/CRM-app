@@ -1,7 +1,5 @@
 <?php
 use App\Http\Controllers\HomeController;
-
-
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -36,4 +34,6 @@ Route::resource('purchase', admin\PurchaseController::class);
 Route::resource('transaction', admin\TransactionController::class);
 //payment controler
 Route::resource('payment', admin\PaymentController::class);
+//Level controller 
+Route::resource('level', admin\LevelController::class);
 

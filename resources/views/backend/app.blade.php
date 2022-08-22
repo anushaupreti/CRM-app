@@ -216,6 +216,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </li>
 
           <li class="nav-item">
+            <a href="/level" class="nav-link">
+              <i class="nav-icon fas fa-level-down-alt"></i>
+              <p>
+                Service Levels
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
             <a href="/student" class="nav-link">
               <i class="nav-icon fas fa-user-cog"></i>
               <p>

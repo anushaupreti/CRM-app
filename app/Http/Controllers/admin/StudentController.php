@@ -25,11 +25,8 @@ class StudentController extends Controller
         ->join('payments','payments.service_id','=','services.id')
         ->join('students','students.id','=','payments.student_id')
         ->groupBy('payments.student_id','payments.service_id')
-
         ->get();
         // dd($payment);
-        // $students = DB::select('select * from students');
-        // return view('backend.student.index',compact('payment','students'));
         return view('backend.student.index', [
             'payment' => $payment,
             'student' => $students,
@@ -64,23 +61,22 @@ class StudentController extends Controller
             'course'=>['required'],
             'total_fee'=>['required'],
         ]);
-        // DB::beginTransaction();
+        DB::beginTransaction();
         try{
-            Student::create([
-                'name' => $request->name,
-                'mobile' => $request->mobile,
-                'email' => $request->email,
-                'address' => $request->address,
-                'course' => $request->course,
-                'total_fee' => $request->total_fee,
-            ]);
+            $student = new Student();
+            $student->name = $request->name;
+            $student->mobile = $request->mobile;
+            $student->email = $request->email;
+            $student->address = $request->address;
+            $student->course = $request->course;
+            $student->total_fee = $request->total_fee;
+            $student->save();
         }catch(\Exception $exception){
             $request->session()->flash('messase','Error while adding data');
             return redirect()->back();
         }
         return redirect()->route('student.index');
         $request->session()->flash('messase','Student added successfully');
-
     }
 
     /**
@@ -94,13 +90,12 @@ class StudentController extends Controller
         $students = Student::all();
         $services = Service::all();
         $payment=DB::table('services')
-        ->select(DB::raw('sum(payments.paid) as total'),'payments.paid','payments.student_id','payments.service_id','services.name as servicename','services.price','students.name','students.email','students.mobile','students.address','students.created_at')
-        ->join('payments','payments.service_id','=','services.id')
-        ->join('students','students.id','=','payments.student_id')
-        ->groupBy('payments.student_id','payments.service_id')
-        ->where('students.id','=', $id)
-
-        ->get();
+            ->select(DB::raw('sum(payments.paid) as total'),'payments.paid','payments.date','payments.student_id','payments.service_id','services.name as servicename','services.price','students.name','students.email','students.mobile','students.address','students.created_at')
+            ->join('payments','payments.service_id','=','services.id')
+            ->join('students','students.id','=','payments.student_id')
+            ->groupBy('payments.student_id','payments.service_id')
+            ->where('students.id','=', $id)
+            ->get();
         // dd($payment);
         // $students = DB::select('select * from students');
         // return view('backend.student.index',compact('payment','students'));
@@ -149,6 +144,7 @@ class StudentController extends Controller
             $student->address = $request->address;
             $student->course = $request->course;
             $student->total_fee = $request->total_fee;
+            dd($student->save());
             $student->save();
         }catch(\Exception $exception ){
             DB::rollBack();

@@ -8,7 +8,7 @@
                     <a href="/student" class="btn btn-primary btn-sm">All Students</a>
                 </div>
                 <div class="card-body">
-                    <form action="/student" method="post">
+                    <form action="{{ route('student.store') }}" method="POST">
                         @csrf
                         <div class="form-group">
                           <label for="name" class="form-label">Student Name <span class="text-danger">*</span></label>

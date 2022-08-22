@@ -30,9 +30,9 @@
                         <tr>
                             <td>{{$loop->index+1}}</td>
                             <td>{{$contents->created_at->format('Y-m-d')}}</td>
-                            <td>{{$contents->student}}</td>
-                            <td>{{$contents->email}}</td>
-                            <td>{{$contents->course}}</td>
+                            <td>{{$contents->student->first()->name}}</td>
+                            <td>{{$contents->student->first()->email}}</td>
+                            <td>{{$contents->student->first()->course}}</td>
                             <td>{{$contents->paid}}</td>
                             {{-- <td>{{$r->price-$r->total}}</td>                            --}}
                             <td class="row">

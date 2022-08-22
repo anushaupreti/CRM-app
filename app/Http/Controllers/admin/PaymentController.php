@@ -23,7 +23,7 @@ class PaymentController extends Controller
         $payment = Payment::with('student')
                     ->orderBy('id', 'DESC')
                     ->get();
-        // dd($students);
+        // dd($payment);
         return view('backend.payment.index',compact('payment'));
     }
 
@@ -34,7 +34,7 @@ class PaymentController extends Controller
      */
     public function create()
     {
-
+ 
         $student = Student::all();
         $service = Service::all();
         $payment = Payment::all();
@@ -108,7 +108,7 @@ class PaymentController extends Controller
 
         ]);
 
-        $payment = Payment::find($id);
+        $payment = Payment::findorfail($id);
         $payment->date = $request->date;
         $payment->student_id = $request->student_id;
         $payment->service_id = $request->service_id;
@@ -126,10 +126,9 @@ class PaymentController extends Controller
      */
     public function destroy($id)
     {
-        $payment = Payment::find($id);
+        $payment = Payment::findorfail($id);
         $payment->delete();
         session()->flash('message','Record Deleted successfully');
         return redirect()->back();
-
     }
 }
