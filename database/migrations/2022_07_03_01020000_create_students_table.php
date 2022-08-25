@@ -19,7 +19,7 @@ class CreateStudentsTable extends Migration
             $table->string('mobile');
             $table->string('email');
             $table->string('address');
-            $table->string('course');
+            $table->foreignId('service_id');
             $table->string('total_fee');
             $table->timestamps();
         });

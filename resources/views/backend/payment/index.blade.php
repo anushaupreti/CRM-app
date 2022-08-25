@@ -20,6 +20,7 @@
                             <th>Student Name</th>
                             <th>Email</th>
                             <th>Servicename</th>
+                            <th>Level</th>
                             <th>Paid</th>
                             {{-- <th>Remaining</th> --}}
                             <th>Actions</th>
@@ -33,13 +34,15 @@
                             <td>{{$contents->student->first()->name}}</td>
                             <td>{{$contents->student->first()->email}}</td>
                             <td>{{$contents->student->first()->course}}</td>
+                            <td>{{$contents->level_id}}</td>
                             <td>{{$contents->paid}}</td>
-                            {{-- <td>{{$r->price-$r->total}}</td>                            --}}
+                            {{-- <td>{{$r->price-$r->total}}</td> --}}
                             <td class="row">
-                                <a href="/payment/{{ $contents->id }}/edit" class="badge badge-primary m-1">Edit</a>
+                                <a href="/payment/{{ $contents->id }}/edit" class="badge badge-primary p-2 badge-pill">Edit</a>
                                 <form action="/payment/{{ $contents->id }}" method="POST">
                                     @method('DELETE')
                                     @csrf
+                                    <a class="badge badge-danger mt-0 badge-pill p-2" type="submit">Delete</a>
                                 </form>
                             </td>
                         </tr>

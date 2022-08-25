@@ -18,17 +18,16 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $students = Student::all();
+        // $students = Student::all();
         $services = Service::all();
-        $payment=DB::table('services')
-        ->select(DB::raw('sum(payments.paid) as total'),'payments.paid','payments.student_id','payments.service_id','services.name as servicename','services.price','students.name','students.email','students.mobile','students.address','students.created_at')
-        ->join('payments','payments.service_id','=','services.id')
-        ->join('students','students.id','=','payments.student_id')
-        ->groupBy('payments.student_id','payments.service_id')
-        ->get();
+        $students=Student::all();
+        // ->select(DB::raw('sum(payments.paid) as total'),'payments.paid','payments.student_id','payments.service_id','services.name as servicename','services.price','students.name','students.email','students.mobile','students.address','students.created_at')
+        // ->join('payments','payments.service_id','=','services.id')
+        // ->join('students','students.id','=','payments.student_id')
+        // ->groupBy('payments.student_id','payments.service_id')
+        // ->get();
         // dd($payment);
         return view('backend.student.index', [
-            'payment' => $payment,
             'student' => $students,
             'service' => $services
         ]);
@@ -58,17 +57,17 @@ class StudentController extends Controller
             'mobile'=>['required'],
             'email'=>['required'],
             'address'=>['required'],
-            'course'=>['required'],
+            'service_id'=>['required'],
             'total_fee'=>['required'],
         ]);
-        DB::beginTransaction();
+        // DB::beginTransaction();
         try{
             $student = new Student();
             $student->name = $request->name;
             $student->mobile = $request->mobile;
             $student->email = $request->email;
             $student->address = $request->address;
-            $student->course = $request->course;
+            $student->service_id = $request->service_id;
             $student->total_fee = $request->total_fee;
             $student->save();
         }catch(\Exception $exception){
@@ -132,7 +131,7 @@ class StudentController extends Controller
             'mobile'=>['required'],
             'email'=>['required'],
             'address'=>['required'],
-            'course'=>['required'],
+            'service_id'=>['required'],
             'total_fee'=>['required'],
         ]);
         DB::begintransaction();
@@ -142,7 +141,7 @@ class StudentController extends Controller
             $student->mobile = $request->mobile;
             $student->email = $request->email;
             $student->address = $request->address;
-            $student->course = $request->course;
+            $student->service_id = $request->service_id;
             $student->total_fee = $request->total_fee;
             dd($student->save());
             $student->save();
@@ -166,16 +165,16 @@ class StudentController extends Controller
      */
     public function destroy($id, $request)
     {
-       DB::beginTransaction();
+    //    DB::beginTransaction();
        try{
         $student = Student::findorfail($id);
         $student->delete();
        }catch(\Exception $exception){
-        DB::rollBack();
+        // DB::rollBack();
         $request->session()->flash('messase','Error deleting records');
             return redirect()->back();
        }
-       DB::commit();
+    //    DB::commit();
        $request->session()->flash('message','Record Deleted Successfully!!');
        return redirect()->back();
     }

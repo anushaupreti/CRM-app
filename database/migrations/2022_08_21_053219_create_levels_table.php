@@ -16,10 +16,10 @@ class CreateLevelsTable extends Migration
         Schema::create('levels', function (Blueprint $table) {
             $table->id();
             $table->foreignId('service_id');
-            $table->string('duration');
-            $table->string('level_name');
+            $table->string('levelname');
             $table->date('start_date');
             $table->date('end_date');
+            $table->string('duration');
             $table->integer('price');
             $table->timestamps();
         });

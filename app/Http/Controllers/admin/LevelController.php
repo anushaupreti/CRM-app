@@ -17,7 +17,7 @@ class LevelController extends Controller
      */
     public function index()
     {
-        $levels = Level::all();
+       
         $service= Service::all();
         return view('backend.level.index',compact('levels','service'));
     }
@@ -41,32 +41,32 @@ class LevelController extends Controller
      */
     public function store(Request $request)
     {
+        // return $request;
         $request->validate([
             'service_id'=>['required'],
-            'level_name' => ['required'],
+            'levelname' => ['required'],
             'start_date'=>['required'],
             'end_date'=>['required'],
             'duration'=>['required'],
             'price'=>['required'],
         ]);
-        DB::beginTransaction();
+        // DB::beginTransaction();
             try{
                 $levels = new Level();
                 $levels->service_id = $request->service_id;
-                $levels->level_name = $request->level_name;
+                $levels->levelname = $request->levelname;
                 $levels->start_date = $request->start_date;
                 $levels->end_date = $request->end_date;
                 $levels->duration = $request->duration;
                 $levels->price = $request->price;
+                // dd($levels);
                 $levels->save();
-                // dd($level);
-
             }catch(\Exception $exception){
                 $request->session()->flash('Message','Error Adding Level');
                 return redirect()->back();
             }
-        return redirect()->route('level.index');
-        $request->session()->flash('message','Level Added Successfully');
+            return redirect()->route('level.index');
+            $request->session()->flash('message','Level Added Successfully');
     }
 
     /**
@@ -75,9 +75,15 @@ class LevelController extends Controller
      * @param  \App\Models\Level  $level
      * @return \Illuminate\Http\Response
      */
-    public function show(Level $level)
+    public function show(Request $request)
     {
-        //
+        $levels = DB::table('levels')
+        ->where('service_id',$request->service_id)
+        ->get();
+
+        if(count($levels)>0){
+            return response()->json($levels);
+        }
     }
 
     /**
@@ -104,21 +110,20 @@ class LevelController extends Controller
     {
         $request->validate([
             'service_id'=>['required'],
-            'level_name' => ['required'],
+            'levelname' => ['required'],
             'start_date'=>['required'],
             'end_date'=>['required'],
             'duration'=>['required'],
             'price'=>['required'],
         ]);
-        DB::begintransaction();
         try{
             $levels = Level::findorFail($id);
             $levels->service_id = $request->service_id;
-            $levels->level_name = $request->level_name;
-            $levels->start_date=$request->start_date;
-            $levels->end_date=$request->end_date;
-            $levels->duration=$request->duration;
-            $levels->price=$request->price;
+            $levels->levelname = $request->levelname;
+            $levels->start_date = $request->start_date;
+            $levels->end_date = $request->end_date;
+            $levels->duration = $request->duration;
+            $levels->price = $request->price;
             $levels->update();
         }catch(\Exception $exception){
             $request->session()->flash('Message','Error Updating Level');
@@ -136,16 +141,13 @@ class LevelController extends Controller
      */
     public function destroy($id, $request)
     {
-        DB::beginTransaction();
        try{
         $level = Level::findorfail($id);
         $level->delete();
        }catch(\Exception $exception){
-        DB::rollBack();
-        $request->session()->flash('messase','Error deleting records');
+            $request->session()->flash('messase','Error deleting records');
             return redirect()->back();
        }
-       DB::commit();
        $request->session()->flash('message','Record Deleted Successfully!!');
        return redirect()->route('level.index');
     }
