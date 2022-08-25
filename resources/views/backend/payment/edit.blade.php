@@ -17,7 +17,7 @@
 
                         <div class="form-group">
                             <label for="customer_id">Student Name</label>
-                            <select class="form-control" name="customet_id" value="{{$payment->customer_id}}">
+                            <select class="form-control" name="customer_id" value="{{$payment->customer_id}}">
                             @foreach ($student as $s)
                             <option value="{{$s->id}}">{{$s->name}}</option>
                             @endforeach
@@ -37,7 +37,7 @@
                         </div>
                         <small class="text-danger">{{$errors->first('paid')}}</small>
 
-                        <button type="submit" class="btn btn-primary">Add</button>
+                        <button type="submit" class="btn btn-primary">Update</button>
                         @if (session('message'))
                             <div class="alert alert-success">{{ session('message')}}</div>
                         @endif

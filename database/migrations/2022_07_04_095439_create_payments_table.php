@@ -18,6 +18,7 @@ class CreatePaymentsTable extends Migration
             $table->date('date');
             $table->foreignId('student_id');
             $table->foreignId('service_id');
+            $table->foreignId('level_id');
             $table->integer('paid');
             $table->timestamps();
         });

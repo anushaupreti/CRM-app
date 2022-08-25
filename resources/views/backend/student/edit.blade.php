@@ -31,7 +31,7 @@
 
                         <div class="form-group">
                             <label for="company_contact" class="form-label">Course <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" name="course" id="course" value="{{ $students->course }}">
+                            <input type="text" class="form-control" name="service_id" id="service_id" value="{{ $students->service_id }}">
                         </div>
 
                         <div class="form-group">

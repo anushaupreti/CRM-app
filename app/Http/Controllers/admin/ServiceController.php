@@ -57,9 +57,16 @@ class ServiceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request)
     {
-        //
+    //     $states = \DB::table('states')
+    //     ->where('country_id', $request->country_id)
+    //     ->get();
+    
+    // if (count($states) > 0) {
+    //     return response()->json($states);
+    // }
+
     }
 
     /**

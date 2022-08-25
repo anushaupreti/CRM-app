@@ -33,7 +33,7 @@
                             <td>{{$r->days}}</td>
 
                             <td>
-                                <a href="/purchase/{{ $r->id }}/edit" class="badge bg-primary m-1">Edit</a>
+                                <a href="/purchase/{{ $r->id }}/edit" class="badge bg-primary m-1 p-2 badge-pill">Edit</a>
                                 <form action="/purchase/{{ $r->id }}" method="POST">
                                     @method('DELETE')
                                     @csrf

@@ -8,7 +8,7 @@
                     <a href="/student" class="btn btn-primary btn-sm">All Students</a>
                 </div>
                 <div class="card-body">
-                    <form action="/student" method="post">
+                    <form action="{{ route('student.store') }}" method="POST">
                         @csrf
                         <div class="form-group">
                           <label for="name" class="form-label">Student Name <span class="text-danger">*</span></label>
@@ -30,10 +30,10 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="course" class="form-label">Course <span class="text-danger">*</span></label>
-                            <select class="form-control" name="course" id="">
+                            <label for="service_id" class="form-label">Course <span class="text-danger">*</span></label>
+                            <select class="form-control" name="service_id" id="">
                                 @foreach($services as $s)
-                                <option value="{{$s->name}}">{{$s->name}} | {{$s->price}}</option>
+                                <option value="{{$s->id}}">{{$s->name}} | {{$s->price}}</option>
                                 @endforeach
                             </select>
                         </div>

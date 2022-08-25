@@ -26,7 +26,7 @@
                             <td>{{$r->price}}</td>
                             <td>{{$r->created_at ->format('D/M/Y')}}</td>
                             <td>
-                                <a href="/service/{{ $r->id }}/edit" class="badge bg-primary">Edit</a>
+                                <a href="/service/{{ $r->id }}/edit" class="badge bg-primary p-2 badge-pill">Edit</a>
                             </td>
                         </tr>
                         @endforeach

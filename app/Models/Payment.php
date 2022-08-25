@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Student;
 use App\Models\Service;
+use App\Models\Level;
 
 class Payment extends Model
 {
@@ -29,6 +30,11 @@ class Payment extends Model
     public function service()
     {
         return $this->hasMany(Service::class,'id','student_id');
+    }
+
+    public function level()
+    {
+        return $this->belongsTo(Level::class);
     }
     
 }
