@@ -9,21 +9,17 @@ class Level extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
+    // protected $guarded = [];
 
-    protected $fillable = ['service_id','levelname','start_date','end_date','duration','price'];
+    // protected $fillable = ['service_id','levelname','start_date','end_date','duration','price'];
 
-    protected $table='levels';
+    // protected $table='levels';
 
-    public $primarykey = 'id';
+    // public $primarykey = 'id';
 
     public function service(){
         return $this->belongsTo(Service::class);
     }
-
-    // public function student(){
-    //     return $this->belongsTo();
-    // }
 }
 
 

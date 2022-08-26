@@ -1,4 +1,8 @@
 <?php
+
+use App\Http\Controllers\admin\LevelController;
+use App\Http\Controllers\admin\ServiceController;
+use App\Http\Controllers\admin\StudentController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -37,3 +41,6 @@ Route::resource('payment', admin\PaymentController::class);
 //Level controller 
 Route::resource('level', admin\LevelController::class);
 
+Route::get('getstudents',[StudentController::class, 'getStudents'])->name('getStudents');
+Route::get('getservices',[ServiceController::class, 'getServices'])->name('getServices');
+Route::get('getlevels',[LevelController::class, 'getLevels'])->name('getLevels');

@@ -18,8 +18,32 @@ class LevelController extends Controller
     public function index()
     {
        
-        $service= Service::all();
-        return view('backend.level.index',compact('levels','service'));
+        $services= Service::all();
+        $levels=Level::all();
+        return view('backend.level.index',compact('levels','services'));
+    }
+
+    // public function getLevels(Request $request)
+    // {
+    //     $id = $request->service_id;
+    //     $levels = Service::with('level')->where('id','=',$id)
+    //         ->get();
+    //         dd($levels);
+    //     // return $levels;
+    //     // if (count($levels) > 0) {
+    //     // }
+    // }
+
+    public function getLevels(Request $request)
+    {
+        $id=$request->service_id;
+        $levels = Service::with('level')->where('id','=',$id)
+                ->get();
+            //    dd($levels);
+                return response()->json($levels);
+        //   if(count($services)>0){ 
+
+        //     }
     }
 
     /**
@@ -77,7 +101,7 @@ class LevelController extends Controller
      */
     public function show(Request $request)
     {
-        $levels = DB::table('levels')
+        $levels = DB::table('levels')   
         ->where('service_id',$request->service_id)
         ->get();
 

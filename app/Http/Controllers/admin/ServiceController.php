@@ -4,7 +4,9 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Service;
+use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ServiceController extends Controller
 {
@@ -79,6 +81,16 @@ class ServiceController extends Controller
     {
       $service = Service::find($id);
       return view('backend.services.edit',compact('service'));
+    }
+
+    public function getServices(Request $request){
+        $id=$request->student_id;
+        $services = Student::with('service')->where('id','=',$id)
+                ->get();
+                // dd($services);
+                return response()->json($services);
+        //   if(count($services)>0){ 
+        //     }
     }
 
     /**

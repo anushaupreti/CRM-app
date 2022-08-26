@@ -60,10 +60,10 @@
         </div>
     </div>
 
-<script>
+{{-- <script>
    document.getElementById("status").addEventListener("click", function() {
 		window.alert("You clicked me!");
 	});
-</script>
+</script> --}}
 @endsection
 

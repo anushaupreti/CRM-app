@@ -33,6 +33,15 @@ class StudentController extends Controller
         ]);
     }
 
+    public function getStudents(Request $request){
+        $students = DB::table('students')
+                    ->where('service_id', $request->service_id)
+                    ->get();
+        if(count($students)>0){
+            return response()->json($students);
+        }
+    }
+
     /**
      * Show the form for creating a new resource.
      *

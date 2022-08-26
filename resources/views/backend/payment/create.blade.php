@@ -39,7 +39,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="service_id">Level Name</label>
+                            <label for="level_id">Level Name</label>
                             <select class="form-control" name="level_id" id="level">
                                 {{-- @foreach ($level as $l)
                                     <option value="{{ $l->id }}">{{ $l->levelname }}</option>
@@ -66,34 +66,44 @@
     <script type="text/javascript">
         $(document).ready(function() {
             $('#student').on('change', function() {
+
                 var studentId = this.value;
                 $('#service').html('');
                 $.ajax({
-                    url: '{{ route('student.index') }}?student_id=' + studentId,
+                    url: '{{ route('getServices') }}?student_id=' + studentId,
                     type: 'get',
                     success: function(res) {
+        
+                        // console.log(student)
                         $('#service').html('<option value = "">Select Service</option>');
                         $.each(res, function(key, value) {
-                            $('#service').append('<option value ="' + service_id + '">' +
-                                service.name + '</option>');
+                            $('#service').append('<option value ="' + value.service_id + '">' +
+                                value.service.name + '</option>');
                         });
-                        $('#level').html('<option value="">Select Level</option>');
+                        // $('#level').html('<option value="">Select Level</option>');
                     }
 
                 });
             });
             $('#service').on('change', function() {
+
                 var serviceId = this.value;
                 $('#level').html('');
                 $.ajax({
-                    url: '{{ route('level.index') }}?service_id=' + serviceId,
+                    url: '{{ route('getLevels') }}?service_id=' + serviceId,
                     type: 'get',
                     success: function(res) {
-                        $('#level').html('<option value="">Select Level</option>');
+        
+                        $('#level').html('<option value = "">Select Level</option>');
                         $.each(res, function(key, value) {
-                            $('#level').append('<option value="' + value.id + '">' +
-                                value.levelname + '<option>');
+                            $.each(value.level, function(key, value) {
+                
+                                if (value.id != '' && value.id != null) {
+                                    $('#level').append('<option value="' + value.id + '">' + value.levelname + '</option>');
+                                }
+                            });
                         });
+
                     }
                 });
             });

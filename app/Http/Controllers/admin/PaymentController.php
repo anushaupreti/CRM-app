@@ -40,11 +40,11 @@ class PaymentController extends Controller
             // ->where('service_id', $request->service_id)
             ->get();
         $service =Service::select('services.*')
-                ->join('students','students.service_id','=','services.id')
-                ->where('service_id',$request->service_id)
+                // ->join('students','students.service_id','=','services.id')
+                // ->where('service_id',$request->service_id)
                 ->get();
         $level = Level::select('levels.*')
-                ->where('service_id',$request->service_id)
+                // ->where('service_id',$request->service_id)
                 ->get();
         $payment = Payment::select('payments.*');
             // ->DB::select(DB::raw('sum(payments.paid) as total'),'payments.paid','payments.date','payments.student_id','payments.service_id','services.name as servicename','services.price','students.name','students.email','students.mobile','students.address','students.created_at')

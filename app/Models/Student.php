@@ -16,7 +16,7 @@ class Student extends Model
     }
     
     public function payment(){
-        return $this->hasMany(Payment::class,'id','student_id');
+        return $this->hasMany(Payment::class,'student_id','id');
     }
 
 }
