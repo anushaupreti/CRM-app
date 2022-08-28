@@ -121,8 +121,16 @@ class ServiceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($request,$id)
     {
-        //
+        try{
+            $service = Service::findorfail($id);
+            $service->delete();
+           }catch(\Exception $exception){
+                $request->session()->flash('messase','Error deleting records');
+                return redirect()->back();
+           }
+           $request->session()->flash('message','Record Deleted Successfully!!');
+           return redirect()->route('service.index');
     }
 }

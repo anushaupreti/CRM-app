@@ -30,27 +30,27 @@
                             <tr>
                                 <td>{{ $loop->index + 1 }}</td>
                                 <td>{{ $row->service->name }}</td>
-                                <td>{{ $row->levelname}}</td>
+                                <td>{{ $row->levelname }}</td>
                                 <td>{{ $row->duration }}</td>
                                 <td>{{ $row->start_date }}</td>
                                 <td>{{ $row->end_date }}</td>
                                 <td>{{ $row->price }}</td>
                                 <td class="row">
-                                    <a href="/level/{{ $row->id }}/edit" class="badge badge-primary mr-1 badge-pill p-2">Edit</a>
-                                    {{-- <form method="POST" action="{{ route('level.destroy',$row->id) }}" >
-                                        {{csrf_field()}}
-                                        {{-- @csrf --}}
-                                        {{-- @method('DELETE')
-                                        <a class="badge badge-danger mt-0 badge-pill p-2" type="submit">Delete</a>
-                                    </form> --}} 
                                     <form action="/purchase/{{ $row->id }}" method="POST">
+                                        <a href="/level/{{ $row->id }}/edit"
+                                            class="badge badge-primary mr-1 badge-pill p-2">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
                                         @method('DELETE')
                                         @csrf
-                                        <a class="badge badge-danger mt-0 p-2 badge-pill" type="submit">Delete</a>
+                                        <a class="badge badge-danger mt-0 p-2 badge-pill" type="submit">
+                                            <i class="fa fa-trash" aria-hidden="true"></i>
+                                        </a>
                                     </form>
                                 </td>
                                 <td>
-                                    <a class="badge badge-info mt-0 p-2 badge-pill" id="status" name=status type="submit">Active</a>
+                                    <a class="badge badge-info mt-0 p-2 badge-pill" id="status" name=status
+                                        type="submit">Active</a>
                                 </td>
                             </tr>
                         @endforeach
@@ -60,10 +60,9 @@
         </div>
     </div>
 
-{{-- <script>
+    {{-- <script>
    document.getElementById("status").addEventListener("click", function() {
 		window.alert("You clicked me!");
 	});
 </script> --}}
 @endsection
-

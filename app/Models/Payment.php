@@ -29,9 +29,8 @@ class Payment extends Model
      */
     public function service()
     {
-        return $this->hasMany(Service::class,'id','student_id');
+        return $this->belongsTo(Service::class);
     }
-
     public function level()
     {
         return $this->belongsTo(Level::class);

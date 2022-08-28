@@ -7,8 +7,8 @@
         <div class="row">
             <div class="col-md-12">
                 @if (session('message'))
-                <div class="alert alert-success">{{ session('message')}}</div>
-            @endif
+                    <div class="alert alert-success">{{ session('message') }}</div>
+                @endif
                 <div class="card-header">
                     <a href="/payment/create" class="btn btn-primary btn-sm">Add Payment</a>
                 </div>
@@ -27,25 +27,30 @@
                         </tr>
 
                         {{-- {{ $payment->students}} --}}
-                        @foreach ($payment as $key=>$contents)
-                        <tr>
-                            <td>{{$loop->index+1}}</td>
-                            <td>{{$contents->created_at->format('Y-m-d')}}</td>
-                            <td>{{$contents->student->first()->name}}</td>
-                            <td>{{$contents->student->first()->email}}</td>
-                            <td>{{$contents->student->first()->course}}</td>
-                            <td>{{$contents->level_id}}</td>
-                            <td>{{$contents->paid}}</td>
-                            {{-- <td>{{$r->price-$r->total}}</td> --}}
-                            <td class="row">
-                                <a href="/payment/{{ $contents->id }}/edit" class="badge badge-primary p-2 badge-pill">Edit</a>
-                                <form action="/payment/{{ $contents->id }}" method="POST">
-                                    @method('DELETE')
-                                    @csrf
-                                    <a class="badge badge-danger mt-0 badge-pill p-2" type="submit">Delete</a>
-                                </form>
-                            </td>
-                        </tr>
+                        @foreach ($payment as $key => $contents)
+                            <tr>
+                                <td>{{ $loop->index + 1 }}</td>
+                                <td>{{ $contents->created_at->format('Y-m-d') }}</td>
+                                <td>{{ $contents->student->first()->name }}</td>
+                                <td>{{ $contents->student->first()->email }}</td>
+                                <td>{{ $contents->service->name }}</td>
+                                <td>{{ $contents->level->levelname }}</td>
+                                <td>{{ $contents->paid }}</td>
+                                {{-- <td>{{$r->price-$r->total}}</td> --}}
+                                <td class="row">
+                                    <form action="/payment/{{ $contents->id }}" method="POST">
+                                        <a href="/payment/{{ $contents->id }}/edit"
+                                            class="badge badge-primary p-2 badge-pill">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        @method('DELETE')
+                                        @csrf
+                                        <a class="badge badge-danger mt-0 badge-pill p-2" type="submit">
+                                            <i class="fa fa-trash" aria-hidden="true"></i>
+                                        </a>
+                                    </form>
+                                </td>
+                            </tr>
                         @endforeach
                     </table>
                 </div>

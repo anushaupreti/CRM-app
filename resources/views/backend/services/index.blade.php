@@ -26,7 +26,16 @@
                             <td>{{$r->price}}</td>
                             <td>{{$r->created_at ->format('D/M/Y')}}</td>
                             <td>
-                                <a href="/service/{{ $r->id }}/edit" class="badge bg-primary p-2 badge-pill">Edit</a>
+                                <form action="/student/{{ $r->id }}" method="POST">
+                                    <a href="/service/{{ $r->id }}/edit" class="badge bg-primary badge-pill p-2">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    @method('DELETE')
+                                    @csrf
+                                    <a class="badge badge-danger badge-pill p-2" type="submit">
+                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                    </a>
+                                </form>
                             </td>
                         </tr>
                         @endforeach
